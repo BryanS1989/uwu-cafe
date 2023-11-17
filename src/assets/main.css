@@ -1,0 +1,52 @@
+@import './base.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+h1 {
+	@apply text-4xl font-bold;
+}
+
+h2 {
+	@apply text-2xl font-bold;
+}
+
+h3 {
+	@apply text-xl font-bold;
+}
+
+input {
+	background-color: var(--color-background-mute);
+	@apply text-center font-bold text-fuchsia-500 rounded-lg;
+}
+
+input::placeholder {
+	font-weight: 400;
+	color: rgb(240, 171, 252);
+}
+
+input[type='number'] {
+	-webkit-appearance: textfield;
+	-moz-appearance: textfield;
+	appearance: textfield;
+}
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+	-webkit-appearance: none;
+}
+
+a {
+	text-decoration: none;
+	transition: 0.4s;
+	@apply text-pink-500 font-extrabold;
+}
+
+@media (hover: hover) {
+	a:hover {
+		@apply text-fuchsia-200;
+	}
+}
+
+@media (min-width: 1024px) {
+}
