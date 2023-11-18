@@ -9,14 +9,25 @@ const store = useProductsStore();
 		v-if="store.order.length"
 		class="flex flex-col justify-center items-center gap-8"
 	>
-		<section
-			class="flex flex-col justify-end items-center bg-stone-800 rounded-lg border-2 border-dashed border-pink-400 w-40 p-1 px-4"
-		>
-			<p class="text-xl font-extrabold">Beneficios</p>
-			<p class="text-lg text-right pt-2 pb-1">
-				<span>{{ `${(store.totalOrder - store.totalUwu).toLocaleString()} $` }}</span>
-			</p>
-		</section>
+		<div class="flex justify-around items-center gap-4 w-full">
+			<section
+				class="w-2/3 flex flex-col justify-end items-center text-pink-400 bg-stone-800 rounded-lg border-2 border-pink-400 p-1 px-4"
+			>
+				<p class="text-xl font-extrabold">Total</p>
+				<p class="text-lg text-right pt-2 pb-1">
+					<span>{{ `${store.totalOrder.toLocaleString()} $` }}</span>
+				</p>
+			</section>
+
+			<section
+				class="w-1/3 flex flex-col justify-end items-center bg-stone-800 rounded-lg border-2 border-dashed border-pink-400 p-1 px-4"
+			>
+				<p class="text-xl font-extrabold">Beneficios</p>
+				<p class="text-lg text-right pt-2 pb-1">
+					<span>{{ `${(store.totalOrder - store.totalUwu).toLocaleString()} $` }}</span>
+				</p>
+			</section>
+		</div>
 
 		<table class="flex-1 border-separate border-spacing-0 table-auto w-full text-sm">
 			<thead>
