@@ -14,9 +14,25 @@ import { RouterLink, RouterView } from 'vue-router';
 			height="400"
 		/>
 
-		<nav class="flex justify-around items-center gap-8">
-			<RouterLink to="/products">Products</RouterLink>
-			<RouterLink to="/order">Order</RouterLink>
+		<nav class="flex justify-around items-center gap-16">
+			<RouterLink to="/products">
+				<a class="flex justify-around items-center gap-2">
+					<font-awesome-icon
+						:icon="['fas', 'utensils']"
+						size="lg"
+					/>
+					Products
+				</a>
+			</RouterLink>
+			<RouterLink to="/order">
+				<a class="flex justify-around items-center gap-2">
+					<font-awesome-icon
+						:icon="['fas', 'file-signature']"
+						size="lg"
+					/>
+					Order
+				</a>
+			</RouterLink>
 		</nav>
 	</header>
 
