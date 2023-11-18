@@ -7,14 +7,14 @@ const store = useProductsStore();
 
 <template>
 	<main class="flex flex-col justify-around items-center gap-8">
-		<section class="self-end flex justify-end items-center gap-2">
-			<div class="bg-stone-800 p-2 rounded-lg w-32">
-				<p class="text-xl font-extrabold border-b">Total</p>
-				<p class="text-right pt-2">
-					<span>{{ store.totalOrder }}</span
-					><span>$</span>
-				</p>
-			</div>
+		<section
+			class="self-end flex flex-col justify-end items-start bg-stone-800 rounded-b-lg border-x border-b border-dashed border-pink-400 w-40 p-1 px-4"
+		>
+			<p class="text-xl font-extrabold">Total</p>
+			<p class="self-end text-lg text-right pt-2 pb-1">
+				<span>{{ store.totalOrder }}</span
+				><span>$</span>
+			</p>
 		</section>
 
 		<ProductCategory

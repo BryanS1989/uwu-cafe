@@ -3,7 +3,9 @@ import { RouterLink, RouterView } from 'vue-router';
 </script>
 
 <template>
-	<header class="flex flex-col justify-around items-center gap-4 pb-4 border-b">
+	<header
+		class="flex flex-col justify-around items-center gap-4 pb-4 border-b border-dashed border-pink-400"
+	>
 		<img
 			alt="UwU Cafe logo"
 			class="logo"
