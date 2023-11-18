@@ -392,6 +392,10 @@ export const useProductsStore = defineStore('products', () => {
 		return order.value.some((product) => product.name === productToFind.name);
 	}
 
+	function newOrder() {
+		order.value = [];
+	}
+
 	return {
 		products,
 		categories,
@@ -404,5 +408,6 @@ export const useProductsStore = defineStore('products', () => {
 		productsByCategory,
 		getOrderProduct,
 		isProductInOrder,
+		newOrder,
 	};
 });
