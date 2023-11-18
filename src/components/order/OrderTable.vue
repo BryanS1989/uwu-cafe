@@ -1,7 +1,14 @@
 <script setup lang="ts">
 import { useProductsStore } from '@/stores/ProductsStore.ts';
+import { useRouter } from 'vue-router';
 
 const store = useProductsStore();
+const router = useRouter();
+
+function newClient() {
+	store.newOrder();
+	router.push({ name: 'home' });
+}
 </script>
 
 <template>
@@ -82,6 +89,13 @@ const store = useProductsStore();
 				</tr>
 			</tfoot>
 		</table>
+
+		<button
+			class="flex flex-col justify-end items-center text-pink-400 bg-stone-800 rounded-full border-2 border-pink-400 py-4 px-8 hover:text-pink-200 hover:border-pink-200 hover:bg-stone-700"
+			@click="newClient"
+		>
+			<p class="text-xl font-extrabold">Nuevo cliente</p>
+		</button>
 	</div>
 
 	<div
