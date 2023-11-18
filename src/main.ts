@@ -1,6 +1,7 @@
 import './assets/main.css';
 
 import { createApp } from 'vue';
+import { createPinia } from 'pinia';
 import App from './App.vue';
 import router from './router';
 
@@ -36,9 +37,12 @@ library.add(
 	faXmark
 );
 
+const pinia = createPinia();
+
 const app = createApp(App);
 
 app.use(router);
+app.use(pinia);
 
 /* add font awesome icon component */
 app.component('FontAwesomeIcon', FontAwesomeIcon);
