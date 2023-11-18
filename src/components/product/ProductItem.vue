@@ -44,8 +44,8 @@ function setIsAdded(isAddedNewValue) {
 		class="flex justify-end items-center gap-2 px-4 py-1 my-2 hover:bg-stone-700 hover:rounded-lg"
 		:class="[{ 'bg-stone-800 rounded-lg text-pink-400': isAdded }]"
 	>
-		<div class="flex-1 truncate whitespace-nowrap">{{ props.product?.name }}</div>
-		<div class="w-15 whitespace-nowrap">{{ props.product?.priceClient }} $</div>
+		<div class="flex-1">{{ props.product?.name }}</div>
+		<div class="w-10 whitespace-nowrap">{{ props.product?.priceClient }} $</div>
 		<input
 			type="number"
 			v-model.number="quantity"
