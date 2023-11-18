@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue';
+import { ref, computed, watch, onBeforeMount } from 'vue';
 import ProductItem from './ProductItem.vue';
 import { useProductsStore } from '@/stores/ProductsStore.ts';
 
@@ -54,6 +54,10 @@ const categoryIcon = computed(() => {
 
 // watch works directly on a ref
 watch(store.order, () => {
+	selectedItems.value = store.categorySelectedItems(props.category);
+});
+
+onBeforeMount(() => {
 	selectedItems.value = store.categorySelectedItems(props.category);
 });
 
