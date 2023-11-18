@@ -6,17 +6,7 @@ const store = useProductsStore();
 </script>
 
 <template>
-	<main class="flex flex-col justify-around items-center gap-8">
-		<section
-			class="self-end flex flex-col justify-end items-start bg-stone-800 rounded-b-lg border-x border-b border-dashed border-pink-400 w-40 p-1 px-4"
-		>
-			<p class="text-xl font-extrabold">Total</p>
-			<p class="self-end text-lg text-right pt-2 pb-1">
-				<span>{{ store.totalOrder }}</span
-				><span>$</span>
-			</p>
-		</section>
-
+	<main class="flex flex-col justify-around items-center gap-8 py-8">
 		<ProductCategory
 			v-for="(category, index) in store.categories"
 			:key="index"
