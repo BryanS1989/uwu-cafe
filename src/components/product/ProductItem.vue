@@ -16,14 +16,13 @@ const quantity = ref(null);
 const isAdded = ref(false);
 
 function manageProduct() {
-	console.log(quantity.value);
 	if (quantity.value) {
 		if (!isAdded.value) {
 			store.addProduct({ ...props.product, quantity: quantity.value });
 			setIsAdded(true);
 		} else {
 			store.removeProduct(props.product);
-			quantity.value = 0;
+			quantity.value = null;
 			setIsAdded(false);
 		}
 	}
@@ -42,8 +41,8 @@ function setIsAdded(isAddedNewValue) {
 
 <template>
 	<div
-		class="flex justify-end items-center gap-2 px-4 py-2 hover:bg-stone-700 hover:rounded-lg"
-		:class="[{ 'bg-stone-800 rounded-lg': isAdded }]"
+		class="flex justify-end items-center gap-2 px-4 py-1 my-2 hover:bg-stone-700 hover:rounded-lg"
+		:class="[{ 'bg-stone-800 rounded-lg text-pink-400': isAdded }]"
 	>
 		<div class="flex-1 truncate whitespace-nowrap">{{ props.product?.name }}</div>
 		<div class="w-15 whitespace-nowrap">{{ props.product?.priceClient }} $</div>
