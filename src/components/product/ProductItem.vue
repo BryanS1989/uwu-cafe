@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import { useProductsStore } from '@/stores/ProductsStore.ts';
+
+const store = useProductsStore();
 
 // props
 const props = defineProps({
@@ -10,31 +13,37 @@ const props = defineProps({
 });
 
 const quantity = ref(null);
-const added = ref(false);
+const isAdded = ref(false);
 
-const emit = defineEmits(['add', 'substract']);
-
-function addProduct() {
+function manageProduct() {
 	console.log(quantity.value);
 	if (quantity.value) {
-		if (!added.value) {
-			emit('add', { ...props.product, quantity: quantity.value });
+		if (!isAdded.value) {
+			store.addProduct({ ...props.product, quantity: quantity.value });
+			setIsAdded(true);
 		} else {
-			emit('substract', { ...props.product, quantity: quantity.value });
+			store.removeProduct(props.product);
+			quantity.value = 0;
+			setIsAdded(false);
 		}
-		toogleAdded();
 	}
 }
 
-function toogleAdded() {
-	added.value = !added.value;
+function updateProduct(newQuantity) {
+	if (isAdded.value) {
+		store.addProduct({ ...props.product, quantity: quantity.value });
+	}
+}
+
+function setIsAdded(isAddedNewValue) {
+	isAdded.value = isAddedNewValue;
 }
 </script>
 
 <template>
 	<div
 		class="flex justify-end items-center gap-2 px-4 py-2 hover:bg-stone-700 hover:rounded-lg"
-		:class="[{ 'bg-stone-800 rounded-lg': added }]"
+		:class="[{ 'bg-stone-800 rounded-lg': isAdded }]"
 	>
 		<div class="flex-1 truncate whitespace-nowrap">{{ props.product?.name }}</div>
 		<div class="w-15 whitespace-nowrap">{{ props.product?.priceClient }} $</div>
@@ -45,14 +54,15 @@ function toogleAdded() {
 			class="w-15 h-10"
 			min="0"
 			max="999"
+			@input="updateProduct"
 		/>
 		<button
 			class="flex justify-center items-center w-10 rounded-lg p-2 disabled:opacity-20"
 			:disabled="!quantity"
-			@click="addProduct"
+			@click="manageProduct"
 		>
 			<font-awesome-icon
-				:icon="['fas', !added ? 'cart-plus' : 'xmark']"
+				:icon="['fas', !isAdded ? 'cart-plus' : 'xmark']"
 				size="xl"
 			/>
 		</button>
