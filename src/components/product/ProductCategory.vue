@@ -13,12 +13,6 @@ const props = defineProps({
 // data
 const expanded = ref(false);
 
-const emit = defineEmits(['add']);
-
-function addProduct(product) {
-	emit('add', { ...product });
-}
-
 function toggleExpand() {
 	expanded.value = !expanded.value;
 }
@@ -87,10 +81,7 @@ const categoryIcon = computed(() => {
 				v-for="(product, index) in props.category?.products"
 				:key="index"
 			>
-				<ProductItem
-					:product="product"
-					@add="addProduct"
-				></ProductItem>
+				<ProductItem :product="product"></ProductItem>
 			</li>
 		</ul>
 	</article>
