@@ -12,8 +12,12 @@ const props = defineProps({
 	},
 });
 
-const quantity = ref(null);
-const isAdded = ref(false);
+const localProduct = ref({
+	...props.product,
+	...store.getOrderProduct(props.product),
+});
+const quantity = ref(localProduct.value?.quantity ?? null);
+const isAdded = ref(store.isProductInOrder(props.product));
 
 function manageProduct() {
 	if (quantity.value) {
@@ -50,8 +54,8 @@ function setIsAdded(isAddedNewValue) {
 		class="flex justify-end items-center gap-2 px-4 py-1 my-2 hover:bg-stone-700 hover:rounded-lg"
 		:class="[{ 'bg-stone-800 rounded-lg text-pink-400': isAdded }]"
 	>
-		<div class="flex-1">{{ props.product?.name }}</div>
-		<div class="w-10 whitespace-nowrap">{{ props.product?.priceClient }} $</div>
+		<div class="flex-1">{{ localProduct?.name }}</div>
+		<div class="w-10 whitespace-nowrap">{{ localProduct?.priceClient }} $</div>
 		<input
 			type="number"
 			v-model.number="quantity"
