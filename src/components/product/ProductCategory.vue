@@ -86,7 +86,6 @@ const categoryIcon = computed(() => {
 			<li
 				v-for="(product, index) in props.category?.products"
 				:key="index"
-				class="py-2 hover:bg-stone-700 hover:rounded-lg"
 			>
 				<ProductItem
 					:product="product"

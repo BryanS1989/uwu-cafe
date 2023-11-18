@@ -32,7 +32,10 @@ function toogleAdded() {
 </script>
 
 <template>
-	<div class="flex justify-end items-center gap-2 px-4">
+	<div
+		class="flex justify-end items-center gap-2 px-4 py-2 hover:bg-stone-700 hover:rounded-lg"
+		:class="[{ 'bg-stone-800 rounded-lg': added }]"
+	>
 		<div class="flex-1 truncate whitespace-nowrap">{{ props.product?.name }}</div>
 		<div class="w-15 whitespace-nowrap">{{ props.product?.priceClient }} $</div>
 		<input
