@@ -22,6 +22,8 @@ import {
 	faCakeCandles,
 	faXmark,
 	faCandyCane,
+	faUtensils,
+	faFileSignature,
 } from '@fortawesome/free-solid-svg-icons';
 
 /* add icons to the library */
@@ -36,7 +38,9 @@ library.add(
 	faIceCream,
 	faCakeCandles,
 	faXmark,
-	faCandyCane
+	faCandyCane,
+	faUtensils,
+	faFileSignature
 );
 
 const pinia = createPinia();
