@@ -8,7 +8,7 @@ const store = useProductsStore();
 // props
 const props = defineProps({
 	category: {
-		type: Object,
+		type: String,
 		required: true,
 	},
 });
@@ -20,7 +20,7 @@ const selectedItems = ref(0);
 // a computed ref
 const categoryIcon = computed(() => {
 	let icon = '';
-	switch (props.category?.name) {
+	switch (props.category) {
 		case 'Comida':
 			icon = 'pizza-slice';
 			break;
@@ -49,7 +49,7 @@ const categoryIcon = computed(() => {
 
 // watch works directly on a ref
 watch(store.order, () => {
-	selectedItems.value = store.categorySelectedItems(props.category?.name);
+	selectedItems.value = store.categorySelectedItems(props.category);
 });
 
 function toggleExpand() {
@@ -74,7 +74,7 @@ function toggleExpand() {
 					:icon="['fas', categoryIcon]"
 					size="lg"
 				/>
-				{{ props.category?.name }}
+				{{ props.category }}
 			</h3>
 
 			<div
@@ -97,7 +97,7 @@ function toggleExpand() {
 			class="py-4 px-2 border-t"
 		>
 			<li
-				v-for="(product, index) in props.category?.products"
+				v-for="(product, index) in store.productsByCategory(props.category)"
 				:key="index"
 			>
 				<ProductItem :product="product"></ProductItem>
