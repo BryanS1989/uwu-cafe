@@ -10,14 +10,24 @@ const props = defineProps({
 });
 
 const quantity = ref(null);
+const added = ref(false);
 
-const emit = defineEmits(['add']);
+const emit = defineEmits(['add', 'substract']);
 
 function addProduct() {
 	console.log(quantity.value);
 	if (quantity.value) {
-		emit('add', { ...props.product, quantity: quantity.value });
+		if (!added.value) {
+			emit('add', { ...props.product, quantity: quantity.value });
+		} else {
+			emit('substract', { ...props.product, quantity: quantity.value });
+		}
+		toogleAdded();
 	}
+}
+
+function toogleAdded() {
+	added.value = !added.value;
 }
 </script>
 
@@ -39,7 +49,7 @@ function addProduct() {
 			@click="addProduct"
 		>
 			<font-awesome-icon
-				:icon="['fas', 'cart-plus']"
+				:icon="['fas', !added ? 'cart-plus' : 'xmark']"
 				size="xl"
 			/>
 		</button>
