@@ -1,6 +1,9 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { ref, computed, watch } from 'vue';
 import ProductItem from './ProductItem.vue';
+import { useProductsStore } from '@/stores/ProductsStore.ts';
+
+const store = useProductsStore();
 
 // props
 const props = defineProps({
@@ -12,10 +15,7 @@ const props = defineProps({
 
 // data
 const expanded = ref(false);
-
-function toggleExpand() {
-	expanded.value = !expanded.value;
-}
+const selectedItems = ref(0);
 
 // a computed ref
 const categoryIcon = computed(() => {
@@ -46,25 +46,43 @@ const categoryIcon = computed(() => {
 	}
 	return icon;
 });
+
+// watch works directly on a ref
+watch(store.order, () => {
+	selectedItems.value = store.categorySelectedItems(props.category?.name);
+});
+
+function toggleExpand() {
+	expanded.value = !expanded.value;
+}
 </script>
 
 <template>
 	<article class="border rounded-lg">
 		<header
-			class="flex p-4 gap-2"
-			:class="[{ 'bg-stone-800 rounded-t-lg': expanded }]"
+			class="flex p-4 gap-8"
+			:class="[
+				{
+					'bg-stone-800 rounded-t-lg text-pink-400': selectedItems,
+					'rounded-lg': !expanded,
+				},
+			]"
 			@click="toggleExpand"
 		>
-			<div class="flex justify-center items-center">
+			<h3 class="flex-1 flex justify-start items-center gap-4">
 				<font-awesome-icon
 					:icon="['fas', categoryIcon]"
-					size="xl"
+					size="lg"
 				/>
-			</div>
-
-			<h3 class="flex-1">
 				{{ props.category?.name }}
 			</h3>
+
+			<div
+				v-if="selectedItems"
+				class="flex justify-center items-center px-3 rounded-lg bg-pink-500"
+			>
+				<span class="font-bold text-stone-100">{{ selectedItems }}</span>
+			</div>
 
 			<div class="flex justify-center items-center">
 				<font-awesome-icon
