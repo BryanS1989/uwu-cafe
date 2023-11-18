@@ -28,9 +28,15 @@ function manageProduct() {
 	}
 }
 
-function updateProduct(newQuantity) {
+function updateProduct() {
 	if (isAdded.value) {
-		store.addProduct({ ...props.product, quantity: quantity.value });
+		if (quantity.value) {
+			store.addProduct({ ...props.product, quantity: quantity.value });
+		} else {
+			store.removeProduct(props.product);
+			quantity.value = null;
+			setIsAdded(false);
+		}
 	}
 }
 
