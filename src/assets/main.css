@@ -49,4 +49,8 @@ a {
 }
 
 @media (min-width: 1024px) {
+	#app main {
+		width: 70vw;
+		margin: 0 auto;
+	}
 }
