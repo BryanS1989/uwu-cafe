@@ -267,16 +267,17 @@ function addToCart(product) {
 </script>
 
 <template>
-	<section class="flex justify-end items-center gap-2 py-2 pb-4">
-		<div class="bg-stone-800 p-2 rounded-lg w-32">
-			<p class="text-xl font-extrabold border-b">Total</p>
-			<p class="text-right pt-2">
-				<span>{{ totalOrder }}</span
-				><span>$</span>
-			</p>
-		</div>
-	</section>
 	<main class="flex flex-col justify-around items-center gap-8">
+		<section class="self-end flex justify-end items-center gap-2">
+			<div class="bg-stone-800 p-2 rounded-lg w-32">
+				<p class="text-xl font-extrabold border-b">Total</p>
+				<p class="text-right pt-2">
+					<span>{{ totalOrder }}</span
+					><span>$</span>
+				</p>
+			</div>
+		</section>
+
 		<ProductCategory
 			v-for="(category, index) in categories"
 			:key="index"
