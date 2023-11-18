@@ -377,6 +377,14 @@ export const useProductsStore = defineStore('products', () => {
 		return products.value.filter((product) => product.category === category);
 	}
 
+	function getOrderProduct(productToFind) {
+		return order.value.find((product) => product.name === productToFind.name);
+	}
+
+	function isProductInOrder(productToFind) {
+		return order.value.some((product) => product.name === productToFind.name);
+	}
+
 	return {
 		products,
 		categories,
@@ -386,5 +394,7 @@ export const useProductsStore = defineStore('products', () => {
 		removeProduct,
 		categorySelectedItems,
 		productsByCategory,
+		getOrderProduct,
+		isProductInOrder,
 	};
 });
