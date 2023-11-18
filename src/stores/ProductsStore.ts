@@ -374,7 +374,6 @@ export const useProductsStore = defineStore('products', () => {
 	}
 
 	function productsByCategory(category) {
-		console.log(category);
 		return products.value.filter((product) => product.category === category);
 	}
 
