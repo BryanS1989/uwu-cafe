@@ -19,6 +19,7 @@ import {
     faBlender,
     faIceCream,
     faCakeCandles,
+    faXmark,
 } from '@fortawesome/free-solid-svg-icons';
 
 /* add icons to the library */
@@ -31,7 +32,8 @@ library.add(
     faMartiniGlassCitrus,
     faBlender,
     faIceCream,
-    faCakeCandles
+    faCakeCandles,
+    faXmark
 );
 
 const app = createApp(App);
