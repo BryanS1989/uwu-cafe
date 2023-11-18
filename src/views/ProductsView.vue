@@ -1,15 +1,8 @@
 <script setup lang="ts">
-import { ref, onBeforeMount } from 'vue';
 import ProductCategory from '../components/product/ProductCategory.vue';
 import { useProductsStore } from '@/stores/ProductsStore.ts';
 
 const store = useProductsStore();
-const categories = ref(new Array());
-
-// Lifecycle
-onBeforeMount(() => {
-	categories.value = store.products;
-});
 </script>
 
 <template>
@@ -25,7 +18,7 @@ onBeforeMount(() => {
 		</section>
 
 		<ProductCategory
-			v-for="(category, index) in categories"
+			v-for="(category, index) in store.categories"
 			:key="index"
 			:category="category"
 			class="flex-1 self-stretch"
