@@ -52,6 +52,7 @@ const categoryIcon = computed(() => {
 	<article class="border rounded-lg">
 		<header
 			class="flex p-4 gap-2"
+			:class="[{ 'bg-stone-800 rounded-t-lg': expanded }]"
 			@click="toggleExpand"
 		>
 			<div class="flex justify-center items-center">
