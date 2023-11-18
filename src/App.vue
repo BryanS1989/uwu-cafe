@@ -7,7 +7,7 @@ import { RouterLink, RouterView } from 'vue-router';
 		<img
 			alt="UwU Cafe logo"
 			class="logo"
-			src="@/assets/logo.png"
+			src="@/assets/img/logo.png"
 			width="400"
 			height="400"
 		/>
