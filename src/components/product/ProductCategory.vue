@@ -40,6 +40,11 @@ const categoryIcon = computed(() => {
 		case 'Postres':
 			icon = 'cake-candles';
 			break;
+
+		case 'Piruletas':
+			icon = 'candy-cane';
+			break;
+
 		default:
 			icon = 'star';
 			break;
