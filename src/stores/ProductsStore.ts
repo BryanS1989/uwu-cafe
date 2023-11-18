@@ -344,7 +344,14 @@ export const useProductsStore = defineStore('products', () => {
 			? order.value
 				.map((product) => product.priceClient * product.quantity)
 				.reduce((accumulator, price) => (accumulator += price))
-				.toLocaleString()
+			: 0;
+	});
+
+	const totalUwu = computed(() => {
+		return order.value.length
+			? order.value
+				.map((product) => product.priceUwu * product.quantity)
+				.reduce((accumulator, price) => (accumulator += price))
 			: 0;
 	});
 
@@ -390,6 +397,7 @@ export const useProductsStore = defineStore('products', () => {
 		categories,
 		order,
 		totalOrder,
+		totalUwu,
 		addProduct,
 		removeProduct,
 		categorySelectedItems,
