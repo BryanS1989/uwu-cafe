@@ -1,14 +1,23 @@
 <script setup lang="ts">
 import { useProductsStore } from '@/stores/ProductsStore.ts';
 import { useRouter } from 'vue-router';
+import { ref, watch, computed } from 'vue';
 
 const store = useProductsStore();
 const router = useRouter();
+
+const discount = ref(store.discount);
 
 function newClient() {
 	store.newOrder();
 	router.push({ name: 'home' });
 }
+
+const storeDiscount = computed(() => store.discount);
+
+watch(storeDiscount, (newStoreDiscount) => {
+	discount.value = newStoreDiscount;
+});
 </script>
 
 <template>
@@ -16,23 +25,44 @@ function newClient() {
 		v-if="store.order.length"
 		class="flex flex-col justify-center items-center gap-8"
 	>
-		<div class="flex justify-around items-center gap-4 w-full">
+		<div class="flex flex-col justify-around items-center gap-4 w-full md:w-1/2">
 			<section
-				class="w-2/3 flex flex-col justify-end items-center text-pink-400 bg-stone-800 rounded-lg border-2 border-pink-400 p-1 px-4"
+				class="w-full flex justify-between items-center text-gray-200 bg-stone-800 rounded-lg border-2 p-1 px-4"
 			>
 				<p class="text-xl font-extrabold">Total</p>
-				<p class="text-lg text-right pt-2 pb-1">
-					<span>{{ `${store.totalOrder.toLocaleString()} $` }}</span>
+				<p class="text-xl text-right pt-2 pb-1">
+					<span class="font-extrabold">{{
+						`${store.totalOrderWithDiscount.toLocaleString()} $`
+					}}</span>
 				</p>
 			</section>
 
 			<section
-				class="w-1/3 flex flex-col justify-end items-center bg-stone-800 rounded-lg border-2 border-dashed border-pink-400 p-1 px-4"
+				class="w-full flex justify-between items-center bg-stone-800 rounded-lg border-2 border-pink-400 p-1 px-4"
 			>
 				<p class="text-xl font-extrabold">Beneficios</p>
 				<p class="text-lg text-right pt-2 pb-1">
-					<span>{{ `${(store.totalOrder - store.totalUwu).toLocaleString()} $` }}</span>
+					<span>{{
+						`${(store.totalOrderWithDiscount - store.totalUwu).toLocaleString()} $`
+					}}</span>
 				</p>
+			</section>
+			<section
+				class="w-full flex justify-between items-center rounded-lg border-2 border-dashed border-pink-400 p-1 px-4"
+			>
+				<p class="text-xl font-extrabold">Descuento</p>
+				<div>
+					<input
+						type="number"
+						v-model.number="discount"
+						placeholder="0"
+						class="w-15 h-10"
+						min="0"
+						max="100"
+						@input="store.setDiscount(discount)"
+					/>
+					<span> % </span>
+				</div>
 			</section>
 		</div>
 
