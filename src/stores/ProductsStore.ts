@@ -337,6 +337,7 @@ export const useProductsStore = defineStore('products', () => {
 	]);
 	const categories = ref([...new Set(products.value.map((product) => product.category))]);
 	const order = ref(new Array());
+	const discount = ref(null);
 
 	// computed()s become getters
 	const totalOrder = computed(() => {
@@ -345,6 +346,12 @@ export const useProductsStore = defineStore('products', () => {
 				.map((product) => product.priceClient * product.quantity)
 				.reduce((accumulator, price) => (accumulator += price))
 			: 0;
+	});
+
+	const totalOrderWithDiscount = computed(() => {
+		return discount.value
+			? totalOrder.value - totalOrder.value * (discount.value / 100)
+			: totalOrder.value;
 	});
 
 	const totalUwu = computed(() => {
@@ -374,6 +381,10 @@ export const useProductsStore = defineStore('products', () => {
 		if (productIndex != -1) {
 			order.value.splice(productIndex, 1);
 		}
+
+		if (!order.value.length) {
+			discount.value = null;
+		}
 	}
 
 	function categorySelectedItems(category) {
@@ -394,13 +405,30 @@ export const useProductsStore = defineStore('products', () => {
 
 	function newOrder() {
 		order.value = [];
+		discount.value = null;
+	}
+
+	function setDiscount(discountToApply) {
+		if (!discountToApply) {
+			discount.value = null;
+			return;
+		}
+
+		if (discountToApply >= 0 && discountToApply <= 100) {
+			discount.value = discountToApply;
+			return;
+		}
+
+		discount.value = null;
 	}
 
 	return {
 		products,
 		categories,
 		order,
+		discount,
 		totalOrder,
+		totalOrderWithDiscount,
 		totalUwu,
 		addProduct,
 		removeProduct,
@@ -409,5 +437,6 @@ export const useProductsStore = defineStore('products', () => {
 		getOrderProduct,
 		isProductInOrder,
 		newOrder,
+		setDiscount,
 	};
 });
