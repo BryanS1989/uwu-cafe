@@ -88,7 +88,9 @@ watch(storeDiscount, (newStoreDiscount) => {
 					<td>{{ `x ${product.quantity}` }}</td>
 					<td>{{ `${product.priceUwu} $` }}</td>
 					<td>{{ `${product.priceClient} $` }}</td>
-					<td>{{ `${(product.priceClient * product.quantity).toLocaleString()} $` }}</td>
+					<td>
+						{{ `${(product.priceClient * product.quantity).toLocaleString()} $` }}
+					</td>
 					<td>
 						<button
 							class="flex justify-center items-center w-5 rounded-lg"
