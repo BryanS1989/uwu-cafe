@@ -21,6 +21,10 @@ const selectedItems = ref(0);
 const categoryIcon = computed(() => {
 	let icon = '';
 	switch (props.category) {
+		case 'Packs':
+			icon = 'box-open';
+			break;
+
 		case 'Comida':
 			icon = 'pizza-slice';
 			break;
