@@ -92,7 +92,7 @@ watch(storeDiscount, (newStoreDiscount) => {
 							class="text-center text-xs"
 							:class="[{ 'bg-stone-700': packIndex % 2 !== 0 }]"
 						>
-							<td class="text-left">{{ product.name }}</td>
+							<td class="text-left pl-2">{{ product.name }}</td>
 							<td>{{ `x ${product.quantity * pack.quantity}` }}</td>
 							<td>{{ `${product.priceUwu} $` }}</td>
 							<td>{{ `${product.priceClient} $` }}</td>
@@ -127,7 +127,7 @@ watch(storeDiscount, (newStoreDiscount) => {
 					v-for="(product, index) in productsOrder"
 					:key="index"
 				>
-					<td class="text-left">{{ product.name }}</td>
+					<td class="text-left pl-2">{{ product.name }}</td>
 					<td>{{ `x ${product.quantity}` }}</td>
 					<td>{{ `${product.priceUwu} $` }}</td>
 					<td>{{ `${product.priceClient} $` }}</td>
