@@ -123,9 +123,10 @@ watch(storeDiscount, (newStoreDiscount) => {
 					</template>
 				</template>
 				<tr
-					class="text-center text-xs even:bg-stone-700"
-					v-for="(product, index) in productsOrder"
-					:key="index"
+					class="text-center text-xs"
+					v-for="(product, indexProduct) in productsOrder"
+					:key="indexProduct"
+					:class="[{ 'bg-stone-700': (packsOrder.length + indexProduct) % 2 !== 0 }]"
 				>
 					<td class="text-left pl-2">{{ product.name }}</td>
 					<td>{{ `x ${product.quantity}` }}</td>
