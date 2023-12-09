@@ -88,7 +88,10 @@ watch(storeDiscount, (newStoreDiscount) => {
 						v-for="(product, indexSubProduct) in pack.subProducts"
 						:key="`${packIndex}-${indexSubProduct}`"
 					>
-						<tr class="text-center text-xs even:bg-stone-700">
+						<tr
+							class="text-center text-xs"
+							:class="[{ 'bg-stone-700': packIndex % 2 !== 0 }]"
+						>
 							<td class="text-left">{{ product.name }}</td>
 							<td>{{ `x ${product.quantity * pack.quantity}` }}</td>
 							<td>{{ `${product.priceUwu} $` }}</td>
