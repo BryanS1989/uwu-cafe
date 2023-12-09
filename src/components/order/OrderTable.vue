@@ -2,6 +2,7 @@
 import { useProductsStore } from '@/stores/ProductsStore.ts';
 import { useRouter } from 'vue-router';
 import { ref, watch, computed } from 'vue';
+import ProductCategory from '../product/ProductCategory.vue';
 
 const store = useProductsStore();
 const router = useRouter();
@@ -14,6 +15,9 @@ function newClient() {
 }
 
 const storeDiscount = computed(() => store.discount);
+
+const productsOrder = computed(() => store.order.filter((product) => product.category !== 'Packs'));
+const packsOrder = computed(() => store.order.filter((product) => product.category === 'Packs'));
 
 watch(storeDiscount, (newStoreDiscount) => {
 	discount.value = newStoreDiscount;
@@ -79,9 +83,45 @@ watch(storeDiscount, (newStoreDiscount) => {
 			</thead>
 
 			<tbody>
+				<template v-for="(pack, packIndex) in packsOrder">
+					<template
+						v-for="(product, indexSubProduct) in pack.subProducts"
+						:key="`${packIndex}-${indexSubProduct}`"
+					>
+						<tr class="text-center text-xs even:bg-stone-700">
+							<td class="text-left">{{ product.name }}</td>
+							<td>{{ `x ${product.quantity * pack.quantity}` }}</td>
+							<td>{{ `${product.priceUwu} $` }}</td>
+							<td>{{ `${product.priceClient} $` }}</td>
+							<td>
+								{{
+									`${(
+										product.priceClient *
+										(product.quantity * pack.quantity)
+									).toLocaleString()} $`
+								}}
+							</td>
+							<td
+								v-if="indexSubProduct === 0"
+								:rowspan="pack.subProducts.length"
+							>
+								<button
+									class="flex justify-center items-center w-full rounded-lg"
+									@click="store.removeProduct(pack)"
+								>
+									<font-awesome-icon
+										:icon="['fas', 'xmark']"
+										size="lg"
+										class="text-red-500"
+									/>
+								</button>
+							</td>
+						</tr>
+					</template>
+				</template>
 				<tr
-					class="text-center text-xs"
-					v-for="(product, index) in store.order"
+					class="text-center text-xs even:bg-stone-700"
+					v-for="(product, index) in productsOrder"
 					:key="index"
 				>
 					<td class="text-left">{{ product.name }}</td>
@@ -93,7 +133,7 @@ watch(storeDiscount, (newStoreDiscount) => {
 					</td>
 					<td>
 						<button
-							class="flex justify-center items-center w-5 rounded-lg"
+							class="flex justify-center items-center w-full rounded-lg"
 							@click="store.removeProduct(product)"
 						>
 							<font-awesome-icon
@@ -107,7 +147,7 @@ watch(storeDiscount, (newStoreDiscount) => {
 			</tbody>
 
 			<tfoot>
-				<tr class="p-1 text-center bg-stone-700 text-pink-500 h-10">
+				<tr class="p-1 text-center bg-stone-800 text-pink-500 h-10">
 					<td
 						colspan="2"
 						class="text-left text-lg font-extrabold"
