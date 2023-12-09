@@ -5,6 +5,50 @@ export const useProductsStore = defineStore('products', () => {
 	// ref()s become state properties
 	const products = ref([
 		{
+			name: 'Pizza + Cocacola',
+			category: 'Packs',
+			priceClient: 2800,
+			priceUwu: 1060,
+			subProducts: [
+				{
+					name: 'Pizza a elegir',
+					category: 'Comida',
+					quantity: 10,
+					priceClient: 60,
+					priceUwu: 6,
+				},
+				{
+					name: 'CocaCola',
+					category: 'Bebidas',
+					quantity: 10,
+					priceClient: 220,
+					priceUwu: 100,
+				},
+			],
+		},
+		{
+			name: 'Pizza + Agua',
+			category: 'Packs',
+			priceClient: 2600,
+			priceUwu: 560,
+			subProducts: [
+				{
+					name: 'Pizza a elegir',
+					category: 'Comida',
+					quantity: 10,
+					priceClient: 60,
+					priceUwu: 6,
+				},
+				{
+					name: 'Agua',
+					category: 'Bebidas',
+					quantity: 10,
+					priceClient: 200,
+					priceUwu: 50,
+				},
+			],
+		},
+		{
 			name: 'Pizza Champiñones',
 			category: 'Comida',
 			priceClient: 60,
@@ -343,8 +387,8 @@ export const useProductsStore = defineStore('products', () => {
 	const totalOrder = computed(() => {
 		return order.value.length
 			? order.value
-				.map((product) => product.priceClient * product.quantity)
-				.reduce((accumulator, price) => (accumulator += price))
+					.map((product) => product.priceClient * product.quantity)
+					.reduce((accumulator, price) => (accumulator += price))
 			: 0;
 	});
 
@@ -357,8 +401,8 @@ export const useProductsStore = defineStore('products', () => {
 	const totalUwu = computed(() => {
 		return order.value.length
 			? order.value
-				.map((product) => product.priceUwu * product.quantity)
-				.reduce((accumulator, price) => (accumulator += price))
+					.map((product) => product.priceUwu * product.quantity)
+					.reduce((accumulator, price) => (accumulator += price))
 			: 0;
 	});
 
