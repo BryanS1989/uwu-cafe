@@ -75,8 +75,8 @@ export const useProductsStore = defineStore('products', () => {
 		{
 			name: 'Yatekomo',
 			category: 'Comida',
-			priceClient: 60,
-			priceUwu: 15,
+			priceClient: 100,
+			priceUwu: 80,
 		},
 		{
 			name: 'Agua',
